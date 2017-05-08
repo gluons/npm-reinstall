@@ -1,0 +1,36 @@
+{
+  "name": "npm-reinstall",
+  "version": "1.0.0",
+  "description": "Just reinstall npm package.",
+  "bin": {
+    "reinstall": "./reinstall.js",
+    "rin": "./reinstall.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gluons/npm-reinstall.git"
+  },
+  "keywords": [
+    "install",
+    "reinstall",
+    "package",
+    "module"
+  ],
+  "author": "Saran Tanpituckpong <sarunta@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gluons/npm-reinstall/issues"
+  },
+  "homepage": "https://github.com/gluons/npm-reinstall",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-gluons": "^2.0.1"
+  },
+  "dependencies": {
+    "cross-spawn": "^5.1.0",
+    "yargs": "^8.0.1"
+  }
+}
