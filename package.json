@@ -12,7 +12,9 @@
     "npm": ">=3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "node ./script/prepare-test.js",
+    "test": "mocha",
+    "posttest": "node ./script/clean-test.js"
   },
   "repository": {
     "type": "git",
@@ -31,8 +33,10 @@
   },
   "homepage": "https://github.com/gluons/npm-reinstall",
   "devDependencies": {
+    "chai": "*",
     "eslint": "^3.19.0",
-    "eslint-config-gluons": "^2.0.1"
+    "eslint-config-gluons": "^2.0.1",
+    "mocha": "*"
   },
   "dependencies": {
     "chalk": "^1.1.3",
