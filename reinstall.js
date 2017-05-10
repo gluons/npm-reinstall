@@ -2,11 +2,16 @@
 
 const chalk = require('chalk');
 
+const spawner = require('./lib/spawner');
+const notifier = require('./lib/notifier');
+
 const repo = 'https://github.com/gluons/npm-reinstall';
+
+notifier(); // Update notifier.
 
 let green = chalk.green;
 let cyan = chalk.cyan;
-let commandText = green('$0');
+let commandText = green('reinstall');
 
 const argv = require('yargs')
 			.usage(`Usage: ${commandText} [options] ${cyan('<package> ...')}`)
@@ -40,11 +45,6 @@ const argv = require('yargs')
 			.describe('verbose', 'Display more information')
 			.epilog(`⭐ Star me at ${repo} 🙂`)
 			.argv;
-
-const spawner = require('./lib/spawner');
-const notifier = require('./lib/notifier');
-
-notifier(); // Update notifier.
 
 let verbose = argv.verbose;
 
