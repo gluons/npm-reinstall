@@ -21,13 +21,21 @@ npm install --global npm-reinstall
 ```
 Usage: reinstall [options] <package> ...
 
-Options:
-  --help, -h      Show help                                            [boolean]
-  --version, -V   Show version number                                  [boolean]
+Dependency Options:
   --global, -g    Reinstall global package                             [boolean]
   --save, -S      Reinstall package in dependencies                    [boolean]
   --save-dev, -D  Reinstall package in devDependencies                 [boolean]
-  --verbose, -v   Display more information                             [boolean]
+
+Options:
+  --help, -h     Show help                                             [boolean]
+  --version, -V  Show version number                                   [boolean]
+  --verbose, -v  Display more information                              [boolean]
+
+Examples:
+  reinstall                        Reinstall all local packages in current working directory.
+  reinstall --global vue-cli       Reinstall vue-cli globally
+  reinstall --save vue             Reinstall vue as dependencies
+  reinstall --save-dev vue-loader  Reinstall vue-loader as devDependencies
 ```
 
 > `rin` is an alias for `reinstall`.  
