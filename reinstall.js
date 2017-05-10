@@ -11,12 +11,15 @@ const argv = require('yargs')
 			.version()
 			.alias('version', 'V')
 			.boolean('global')
+			.group('global', 'Dependency Options:')
 			.alias('global', 'g')
 			.describe('global', 'Reinstall global package')
 			.boolean('save')
+			.group('save', 'Dependency Options:')
 			.alias('save', 'S')
 			.describe('save', 'Reinstall package in dependencies')
 			.boolean('save-dev')
+			.group('save-dev', 'Dependency Options:')
 			.alias('save-dev', 'D')
 			.describe('save-dev', 'Reinstall package in devDependencies')
 			.boolean('verbose')
@@ -26,6 +29,9 @@ const argv = require('yargs')
 			.argv;
 
 const spawner = require('./lib/spawner');
+const notifier = require('./lib/notifier');
+
+notifier(); // Update notifier.
 
 let verbose = argv.verbose;
 
