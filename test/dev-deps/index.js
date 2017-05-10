@@ -1,13 +1,11 @@
 'use strict';
 
 module.exports = function () {
-	let evl = require('evl');
+	let DateEQ = require('date-eq');
+	let Comparer = DateEQ.Comparer;
 	let nvl = require('nvl');
 
-	return evl(
-		() => {
-			throw new Error();
-		},
-		() => nvl(null, 1)
-	);
+	let now = new Date();
+
+	return nvl(void 0, Comparer.eq(now, now));
 };
