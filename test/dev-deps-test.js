@@ -18,7 +18,7 @@ describe('Dev Dependencies', function () {
 		expect(result).to.be.true;
 	});
 	it('should have devDependencies after reinstallation', () => new Promise((resolve, reject) => {
-		let child = spawn('node', [reinstallPath, '--save-dev', 'evl', 'nvl'], {
+		let child = spawn('node', [reinstallPath, '--save-dev', 'date-eq', 'nvl'], {
 			cwd
 		});
 		let isErrorThrown = false;
