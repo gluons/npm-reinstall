@@ -9,7 +9,7 @@ const deps = require('./deps');
 let cwd = path.resolve(__dirname, './deps');
 let reinstallPath = path.resolve(__dirname, '../reinstall');
 
-describe('Dependencies', function () {
+describe('[NPM] Dependencies', function () {
 	this.slow(5000);
 	this.timeout(10000);
 
@@ -19,7 +19,8 @@ describe('Dependencies', function () {
 	});
 	it('should have dependencies after reinstallation', () => new Promise((resolve, reject) => {
 		let child = spawn('node', [reinstallPath, '--save', 'vue', 'vue-router'], {
-			cwd
+			cwd,
+			stdio: 'ignore'
 		});
 		let isErrorThrown = false;
 

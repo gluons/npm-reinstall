@@ -6,10 +6,10 @@ const path = require('path');
 
 const devDeps = require('./dev-deps');
 
-let cwd = path.resolve(__dirname, './dev-deps');
+let cwd = path.resolve(__dirname, './dev-deps-yarn');
 let reinstallPath = path.resolve(__dirname, '../reinstall');
 
-describe('[NPM] Dev Dependencies', function () {
+describe('[Yarn] Dev Dependencies', function () {
 	this.slow(5000);
 	this.timeout(10000);
 

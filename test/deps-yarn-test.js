@@ -4,21 +4,21 @@ const expect = require('chai').expect;
 const spawn = require('cross-spawn');
 const path = require('path');
 
-const devDeps = require('./dev-deps');
+const deps = require('./deps');
 
-let cwd = path.resolve(__dirname, './dev-deps');
+let cwd = path.resolve(__dirname, './deps-yarn');
 let reinstallPath = path.resolve(__dirname, '../reinstall');
 
-describe('[NPM] Dev Dependencies', function () {
+describe('[Yarn] Dependencies', function () {
 	this.slow(5000);
 	this.timeout(10000);
 
-	it('should have devDependencies before reinstallation', () => {
-		let result = devDeps();
-		expect(result).to.be.true;
+	it('should have dependencies before reinstallation', () => {
+		let result = deps();
+		expect(result).to.exist;
 	});
-	it('should have devDependencies after reinstallation', () => new Promise((resolve, reject) => {
-		let child = spawn('node', [reinstallPath, '--save-dev', 'date-eq', 'nvl'], {
+	it('should have dependencies after reinstallation', () => new Promise((resolve, reject) => {
+		let child = spawn('node', [reinstallPath, '--save', 'vue', 'vue-router', '-v'], {
 			cwd,
 			stdio: 'ignore'
 		});
