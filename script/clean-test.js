@@ -1,7 +1,7 @@
 'use strict';
 
 const chalk = require('chalk');
-const rimraf = require('rimraf');
+const del = require('del');
 const path = require('path');
 
 const depsNodeModulesPath = path.resolve(__dirname, '../test/deps/node_modules');
@@ -9,18 +9,20 @@ const devDepsNodeModulesPath = path.resolve(__dirname, '../test/dev-deps/node_mo
 
 console.log(chalk.cyan('Cleaning test...'));
 
-rimraf(depsNodeModulesPath, err => {
-	if (err) {
-		console.log(chalk.red('Clean dependencies fail.'));
-	} else {
+del(depsNodeModulesPath).then(
+	() => {
 		console.log(chalk.green('Clean dependencies succeed.'));
+	},
+	() => {
+		console.log(chalk.red('Clean dependencies fail.'));
 	}
-});
+);
 
-rimraf(devDepsNodeModulesPath, err => {
-	if (err) {
-		console.log(chalk.red('Clean devDependencies fail.'));
-	} else {
+del(devDepsNodeModulesPath).then(
+	() => {
 		console.log(chalk.green('Clean devDependencies succeed.'));
+	},
+	() => {
+		console.log(chalk.red('Clean devDependencies fail.'));
 	}
-});
+);

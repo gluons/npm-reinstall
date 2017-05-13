@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
+const caniuseYarn = require('@danielbayerlein/caniuse-yarn');
 const chalk = require('chalk');
+const hasYarn = require('has-yarn');
 
+const MODE = require('./lib/mode');
 const spawner = require('./lib/spawner');
 const notifier = require('./lib/notifier');
 
@@ -13,6 +16,10 @@ notifier(); // Update notifier.
 let green = chalk.green;
 let cyan = chalk.cyan;
 let commandText = green('reinstall');
+
+let npmSpawner = spawner.npmSpawner;
+let yarnSpawner = spawner.yarnSpawner;
+let spawnCaller = caniuseYarn() && hasYarn() ? yarnSpawner : npmSpawner;
 
 const argv = require('yargs')
 			.usage(`Usage: ${commandText} [options] ${cyan('<package> ...')}`)
@@ -51,12 +58,12 @@ let verbose = argv.verbose;
 
 if (argv._.length > 0) {
 	if (argv.global) {
-		spawner(spawner.mode.GLOBAL, argv._, verbose);
+		spawnCaller(MODE.GLOBAL, argv._, verbose);
 	} else if (argv.save) {
-		spawner(spawner.mode.SAVE, argv._, verbose);
+		spawnCaller(MODE.SAVE, argv._, verbose);
 	} else if (argv.saveDev) {
-		spawner(spawner.mode.SAVE_DEV, argv._, verbose);
+		spawnCaller(MODE.SAVE_DEV, argv._, verbose);
 	}
 } else {
-	spawner.all(verbose);
+	spawnCaller.all(verbose);
 }
