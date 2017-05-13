@@ -17,10 +17,6 @@ let green = chalk.green;
 let cyan = chalk.cyan;
 let commandText = green('reinstall');
 
-let npmSpawner = spawner.npmSpawner;
-let yarnSpawner = spawner.yarnSpawner;
-let spawnCaller = caniuseYarn() && hasYarn() ? yarnSpawner : npmSpawner;
-
 const argv = require('yargs')
 			.usage(`Usage: ${commandText} [options] ${cyan('<package> ...')}`)
 			.help()
@@ -48,13 +44,21 @@ const argv = require('yargs')
 			.describe('save-dev', 'Reinstall package in devDependencies')
 			.example(`${commandText} --save-dev ${cyan('vue-loader')}`, `Reinstall ${cyan('vue-loader')} as devDependencies`)
 
+			.boolean('yarn')
+			.alias('yarn', 'y')
+			.describe('yarn', 'Force to use Yarn')
 			.boolean('verbose')
 			.alias('verbose', 'v')
 			.describe('verbose', 'Display more information')
-			.epilog(`⭐ Star me at ${repo} 🙂`)
+			.epilog(`⭐ Star me at ${repo} 😃`)
 			.argv;
 
 let verbose = argv.verbose;
+let forceUseYarn = argv.yarn;
+
+let npmSpawner = spawner.npmSpawner;
+let yarnSpawner = spawner.yarnSpawner;
+let spawnCaller = ((caniuseYarn() && hasYarn()) || forceUseYarn) ? yarnSpawner : npmSpawner;
 
 if (argv._.length > 0) {
 	if (argv.global) {

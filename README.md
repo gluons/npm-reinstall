@@ -30,6 +30,7 @@ Dependency Options:
 Options:
   --help, -h     Show help                                             [boolean]
   --version, -V  Show version number                                   [boolean]
+  --yarn, -y     Force use Yarn                                        [boolean]
   --verbose, -v  Display more information                              [boolean]
 
 Examples:
