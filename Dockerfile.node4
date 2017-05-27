@@ -1,0 +1,5 @@
+FROM node:4
+WORKDIR ./app
+ADD . /app
+RUN yarn
+ENTRYPOINT yarn test
