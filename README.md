@@ -7,6 +7,8 @@
 
 🔄 Just reinstall [NPM](https://www.npmjs.com) package.
 
+![Screenshot](./asset/screenshot.gif)
+
 ## What does this package do?
 
 `npm-reinstall` will **uninstall** and **install** your packages again.
