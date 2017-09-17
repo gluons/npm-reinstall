@@ -18,23 +18,20 @@ export default function reinstall(argv: yargs.Arguments) {
 	let yarnExists: boolean = hasYarn();
 	let verbose: boolean = argv.verbose;
 	let forceYarn: boolean = argv.yarn;
-	let forceNPM: boolean = argv.npm;
 
 	let runAll: typeof NPMRunAll | typeof YarnRunAll;
 	let run: typeof NPMRun | typeof YarnRun;
 	if (forceYarn) {
 		runAll = YarnRunAll;
 		run = YarnRun;
-	} else if (forceNPM) {
-		runAll = NPMRunAll;
-		run = NPMRun;
 	} else {
-		runAll = canIUseYarn && yarnExists ? YarnRunAll : NPMRunAll;
-		// Use NPM on global when it isn't forced to use Yarn.
+		runAll = (canIUseYarn && yarnExists) ? YarnRunAll : NPMRunAll;
+
+		// Only use NPM on global when it isn't forced to use Yarn.
 		if (argv.global) {
 			run = NPMRun;
 		} else {
-			run = canIUseYarn && yarnExists ? YarnRun : NPMRun;
+			run = (canIUseYarn && yarnExists) ? YarnRun : NPMRun;
 		}
 	}
 

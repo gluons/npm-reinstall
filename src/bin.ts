@@ -40,12 +40,6 @@ const argv = yargs
 	.alias('yarn', 'y')
 	.describe('yarn', 'Force to use Yarn')
 
-	.boolean('npm')
-	.alias('npm', 'n')
-	.describe('npm', 'Force to use NPM')
-
-	.conflicts('yarn', 'npm')
-
 	.boolean('verbose')
 	.alias('verbose', 'v')
 	.describe('verbose', 'Display more information')
