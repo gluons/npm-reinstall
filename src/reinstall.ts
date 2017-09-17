@@ -1,4 +1,5 @@
 import * as caniuseYarn from '@danielbayerlein/caniuse-yarn';
+import { red } from 'chalk';
 import * as hasYarn from 'has-yarn';
 import * as yargs from 'yargs';
 
@@ -35,15 +36,24 @@ export default function reinstall(argv: yargs.Arguments) {
 		}
 	}
 
+	let errCatch = (err: Error) => {
+		let errString: string = err.stack ? err.stack : err.toString();
+		console.error(red(errString));
+	};
+
 	if (argv._.length > 0) {
 		if (argv.global) {
-			run(MODE.GLOBAL, argv._, verbose);
+			run(MODE.GLOBAL, argv._, verbose)
+				.catch(errCatch);
 		} else if (argv.save) {
-			run(MODE.SAVE, argv._, verbose);
+			run(MODE.SAVE, argv._, verbose)
+				.catch(errCatch);
 		} else if (argv.saveDev) {
-			run(MODE.SAVE_DEV, argv._, verbose);
+			run(MODE.SAVE_DEV, argv._, verbose)
+				.catch(errCatch);
 		}
 	} else {
-		runAll(verbose);
+		runAll(verbose)
+			.catch(errCatch);
 	}
 }
