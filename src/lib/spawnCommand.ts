@@ -1,4 +1,4 @@
-import spawn from 'cross-spawn';
+import * as spawn from 'cross-spawn';
 
 /**
  * Spawn the command.

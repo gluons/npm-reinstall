@@ -1,5 +1,5 @@
-import caniuseYarn from '@danielbayerlein/caniuse-yarn';
-import hasYarn from 'has-yarn';
+import * as caniuseYarn from '@danielbayerlein/caniuse-yarn';
+import * as hasYarn from 'has-yarn';
 import * as yargs from 'yargs';
 
 import MODE from './lib/mode';

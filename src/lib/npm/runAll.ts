@@ -1,6 +1,6 @@
 import { green, red } from 'chalk';
-import del from 'del';
-import ora from 'ora';
+import * as del from 'del';
+import * as ora from 'ora';
 
 import spawnNPM from './spawnNPM';
 
