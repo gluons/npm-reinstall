@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as del from 'del';
 import * as ora from 'ora';
 
