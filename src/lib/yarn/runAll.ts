@@ -21,6 +21,14 @@ export default function runAll(verbose = false) {
 	return del('node_modules/') // Uninstalling.
 		.then(
 			() => {
+				/*
+				 * If `verbose` is enable, no need to display installation message.
+				 */
+				if (verbose) {
+					spinner.stop();
+				} else {
+					spinner.text = 'Installing all packages ...';
+				}
 				return spawnYarn([], verbose); // Installing
 			},
 			err => {

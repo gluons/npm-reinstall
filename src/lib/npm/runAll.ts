@@ -29,7 +29,6 @@ export default function runAll(verbose = false) {
 				} else {
 					spinner.text = 'Installing all packages ...';
 				}
-
 				return spawnNPM(['install'], verbose); // Installing
 			},
 			err => {

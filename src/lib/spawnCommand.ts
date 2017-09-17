@@ -20,12 +20,9 @@ export default function spawnCommand(command: string, args: string[], verbose = 
 	}
 
 	return new Promise((resolve, reject) => {
-		let child = spawn(command, args);
-
-		if (verbose) {
-			child.stdout.pipe(process.stdout);
-			child.stderr.pipe(process.stderr);
-		}
+		let child = spawn(command, args, {
+			stdio: verbose ? 'inherit' : 'pipe'
+		});
 
 		child.on('error', err => {
 			reject(err);
