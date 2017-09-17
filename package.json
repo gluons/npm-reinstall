@@ -3,8 +3,8 @@
   "version": "1.1.2",
   "description": "Just reinstall npm package.",
   "bin": {
-    "reinstall": "./dist/reinstall.js",
-    "rin": "./dist/reinstall.js"
+    "reinstall": "./dist/bin.js",
+    "rin": "./dist/bin.js"
   },
   "preferGlobal": true,
   "engines": {
