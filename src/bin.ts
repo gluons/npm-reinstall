@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cyan, green } from 'chalk';
+import { cyan, green, yellow } from 'chalk';
 import * as yargs from 'yargs';
 
 import notifier from './lib/notifier';
@@ -36,6 +36,10 @@ const argv = yargs
 	.describe('save-dev', 'Reinstall package in devDependencies')
 	.example(`${COMMAND} --save-dev ${cyan('vue-loader')}`, `Reinstall ${cyan('vue-loader')} as devDependencies`)
 
+	.boolean('npm')
+	.alias('npm', 'n')
+	.describe('npm', 'Force to use NPM')
+
 	.boolean('yarn')
 	.alias('yarn', 'y')
 	.describe('yarn', 'Force to use Yarn')
@@ -44,6 +48,17 @@ const argv = yargs
 	.alias('verbose', 'v')
 	.describe('verbose', 'Display more information')
 	.epilog(`⭐ Star me at ${repo} 😃`)
+
+	.check(parsedArgv => {
+		let npm: boolean = parsedArgv.npm;
+		let yarn: boolean = parsedArgv.yarn;
+		if (npm && yarn) {
+			throw new Error(`ℹ️ Arguments ${yellow('npm')} and ${yellow('yarn')} are mutually exclusive`);
+		} else {
+			return true;
+		}
+	})
+
 	.argv;
 
 reinstall(argv);
