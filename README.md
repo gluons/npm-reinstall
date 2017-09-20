@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/npm-reinstall.svg?style=flat-square)](https://www.npmjs.com/package/npm-reinstall)
 [![npm](https://img.shields.io/npm/dt/npm-reinstall.svg?style=flat-square)](https://www.npmjs.com/package/npm-reinstall)
 [![Travis](https://img.shields.io/travis/gluons/npm-reinstall.svg?style=flat-square)](https://travis-ci.org/gluons/npm-reinstall)
-[![ESLint Gluons](https://img.shields.io/badge/code%20style-gluons-9C27B0.svg?style=flat-square)](https://github.com/gluons/eslint-config-gluons)
+[![TSLint](https://img.shields.io/badge/TSLint-gluons-15757B.svg?style=flat-square)](https://github.com/gluons/tslint-config-gluons)
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://github.com/carloscuesta/gitmoji)
 
 🔄 Just reinstall [NPM](https://www.npmjs.com) package.
