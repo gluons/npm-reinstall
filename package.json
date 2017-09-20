@@ -7,6 +7,9 @@
     "rin": "./dist/bin.js"
   },
   "preferGlobal": true,
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=4",
     "npm": ">=3"
