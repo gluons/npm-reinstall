@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-docker build -t npm-reinstall:node4 -f ./docker/node4/Dockerfile .
-docker build -t npm-reinstall:node6 -f ./docker/node6/Dockerfile .
-docker build -t npm-reinstall:node8 -f ./docker/node8/Dockerfile .
