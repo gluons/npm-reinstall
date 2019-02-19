@@ -2557,6 +2557,11 @@ ts-node@^8.0.2:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
+tsconfig-gluons@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/tsconfig-gluons/-/tsconfig-gluons-1.0.1.tgz#b1984ea96ac0666cfeed7ee1662661eaf6ea9ce7"
+  integrity sha512-M4VKQdyFhwMIBy/e0hrkiVfpa/Q0+k6xXa7/9+7BrBDQ54e8OKhRA5WV6ELbtaLCBjFM5lJewAs5EpoS5RysSg==
+
 tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
