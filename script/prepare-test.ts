@@ -1,8 +1,10 @@
-import { green, red } from 'chalk';
+import chalk from 'chalk';
 import { rainbow } from 'chalk-animation';
-import * as spawn from 'cross-spawn';
-import * as once from 'lodash.once';
-import * as path from 'path';
+import spawn from 'cross-spawn';
+import once from 'lodash.once';
+import path from 'path';
+
+const { green, red } = chalk;
 
 // NPM
 const depsPath = path.resolve(__dirname, '../test/npm/deps');

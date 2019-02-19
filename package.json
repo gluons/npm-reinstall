@@ -16,7 +16,7 @@
   },
   "scripts": {
     "prebuild": "rimraf dist/*",
-    "build": "tsc -p .",
+    "build": "tsc",
     "prebuild-docker": "run-s build",
     "build-docker": "./script/build-docker",
     "test:local:4": "docker run -t --rm npm-reinstall:node4",
@@ -25,7 +25,7 @@
     "test:local": "run-s test:local:*",
     "preparetest": "ts-node ./script/prepare-test.ts",
     "pretest": "run-p preparetest build",
-    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"allowJs\\\":true} mocha --compilers ts:ts-node/register ./test/*.ts"
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"allowJs\\\":true} mocha -r ts-node/register ./test/*.ts"
   },
   "repository": {
     "type": "git",

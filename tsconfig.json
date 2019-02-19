@@ -6,16 +6,12 @@
 		"lib": [
 			"es2015"
 		],
-		"outDir": "./dist",
-		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
-		"paths": {
-			"@/*": [
-				"./src/*"
-			]
-		}
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true
 	},
 	"include": [
-		"./src/**/*"
+		"src"
 	]
 }

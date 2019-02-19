@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 
-import { cyan, green, yellow } from 'chalk';
+import chalk from 'chalk';
 import * as yargs from 'yargs';
 
 import notifier from './lib/notifier';
 import reinstall from './reinstall';
 
+const { cyan, green, yellow } = chalk;
+
 const COMMAND = green('reinstall');
 const repo = 'https://github.com/gluons/npm-reinstall';
+
+notifier();
 
 const argv = yargs
 	.usage(`Usage: ${COMMAND} [options] ${cyan('<package> ...')}`)

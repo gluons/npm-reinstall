@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-expression */
 import { expect } from 'chai';
-import * as spawn from 'cross-spawn';
-import * as path from 'path';
+import spawn from 'cross-spawn';
+import path from 'path';
 
 import devDeps = require('./npm/dev-deps');
 

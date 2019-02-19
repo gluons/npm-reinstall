@@ -1,11 +1,13 @@
 import * as caniuseYarn from '@danielbayerlein/caniuse-yarn';
-import { red } from 'chalk';
+import chalk from 'chalk';
 import * as hasYarn from 'has-yarn';
 import * as yargs from 'yargs';
 
 import MODE from './lib/mode';
 import { NPMRun, NPMRunAll } from './lib/npm';
 import { YarnRun, YarnRunAll } from './lib/yarn';
+
+const { red } = chalk;
 
 const canIUseYarn: boolean = caniuseYarn();
 
@@ -17,9 +19,9 @@ const canIUseYarn: boolean = caniuseYarn();
  */
 export default function reinstall(argv: yargs.Arguments) {
 	let yarnExists: boolean = hasYarn();
-	let verbose: boolean = argv.verbose;
-	let forceYarn: boolean = argv.yarn;
-	let forceNPM: boolean = argv.npm;
+	let verbose: boolean = argv.verbose as boolean;
+	let forceYarn: boolean = argv.yarn as boolean;
+	let forceNPM: boolean = argv.npm as boolean;
 
 	let runAll: typeof NPMRunAll | typeof YarnRunAll;
 	let run: typeof NPMRun | typeof YarnRun;

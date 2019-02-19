@@ -1,6 +1,5 @@
-import * as chalk from 'chalk';
-import * as del from 'del';
-import * as ora from 'ora';
+import chalk from 'chalk';
+import ora from 'ora';
 
 import { createInstallArgs, createUninstallArgs } from '../createArgs';
 import MODE from '../mode';

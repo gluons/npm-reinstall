@@ -1,4 +1,4 @@
-import * as updateNotifier from 'update-notifier';
+import updateNotifier from 'update-notifier';
 
 const pkg = require('../package.json');
 
@@ -11,5 +11,5 @@ export default function notifier(): void {
 	updateNotifier({
 		pkg,
 		updateCheckInterval: 1000 * 60 * 60 // 1 hour
-	});
+	}).notify();
 }

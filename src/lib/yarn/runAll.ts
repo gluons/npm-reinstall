@@ -1,8 +1,10 @@
-import { green, red } from 'chalk';
-import * as del from 'del';
-import * as ora from 'ora';
+import chalk from 'chalk';
+import del from 'del';
+import ora from 'ora';
 
 import spawnYarn from './spawnYarn';
+
+const { green, red } = chalk;
 
 /**
  * Run installing all packages via Yarn.
