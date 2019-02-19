@@ -1,6 +1,0 @@
-{
-	"extends": "gluons/es6",
-	"env": {
-		"mocha": true
-	}
-}
