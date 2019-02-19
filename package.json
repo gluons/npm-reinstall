@@ -11,7 +11,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=4",
+    "node": ">=6",
     "npm": ">=3"
   },
   "scripts": {
