@@ -51,6 +51,18 @@
   resolved "https://registry.npmjs.org/@types/has-yarn/-/has-yarn-1.0.0.tgz#912253265415ba3e719d4ff0cb68c915fb933a09"
   integrity sha512-ODVaBw6s7WVbr9qtpcLtcm9gGM3uQSn0GvwuLFlgAvuOWIsqUCRN/SwdjQrhq8PQ9+gICbVx1iL3X9v9PKGKSg==
 
+"@types/lodash.once@^4.1.5":
+  version "4.1.5"
+  resolved "https://registry.npmjs.org/@types/lodash.once/-/lodash.once-4.1.5.tgz#03e3abd3a458ed3e1979b29e0f398dab639192ea"
+  integrity sha512-ApH8WoKY8I+GGPQqaJYvsWKvbrN3am+4J0LgXY8MmCQPip37QJtNB38QD2vOMQqnS+gIeBY/UuMHj5xJpXb4zw==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.121"
+  resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.121.tgz#9327e20d49b95fc2bf983fc2f045b2c6effc80b9"
+  integrity sha512-ORj7IBWj13iYufXt/VXrCNMbUuCTJfhzme5kx9U/UtcIPdJYuvPDUAlHlbNhz/8lKCLy9XGIZnGrqXOtQbPGoQ==
+
 "@types/minimatch@*":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.1.tgz#b683eb60be358304ef146f5775db4c0e3696a550"

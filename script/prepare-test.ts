@@ -13,26 +13,26 @@ const devDepsPath = path.resolve(__dirname, '../test/npm/dev-deps');
 const depsYarnPath = path.resolve(__dirname, '../test/yarn/deps');
 const devDepsYarnPath = path.resolve(__dirname, '../test/yarn/dev-deps');
 
-let rb = rainbow('Preparing test...');
+const rb = rainbow('Preparing test...');
 
-let clear = once(() => {
+const clear = once(() => {
 	rb.stop();
 	console.log('\u001Bc'); // Clear terminal.
 });
 
-let depsChild = spawn('npm', ['install'], {
+const depsChild = spawn('npm', ['install'], {
 	cwd: depsPath,
 	stdio: 'ignore'
 });
-let devDepsChild = spawn('npm', ['install'], {
+const devDepsChild = spawn('npm', ['install'], {
 	cwd: devDepsPath,
 	stdio: 'ignore'
 });
-let depsYarnChild = spawn('yarn', [], {
+const depsYarnChild = spawn('yarn', [], {
 	cwd: depsYarnPath,
 	stdio: 'ignore'
 });
-let devDepsYarnChild = spawn('yarn', [], {
+const devDepsYarnChild = spawn('yarn', [], {
 	cwd: devDepsYarnPath,
 	stdio: 'ignore'
 });
