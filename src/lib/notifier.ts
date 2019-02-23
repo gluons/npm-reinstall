@@ -1,6 +1,6 @@
 import updateNotifier from 'update-notifier';
 
-const pkg = require('../package.json');
+const pkg = require('../../package.json');
 
 const notificationInterval = 1000 * 60 * 60; // 1 hour
 
