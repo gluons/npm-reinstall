@@ -1,32 +1,32 @@
-import MODE, { InstallMode } from './mode';
+import { Command, Mode } from '../types';
 
 /**
  * Create installation arguments.
  *
  * @export
- * @param {('npm'| 'yarn')} command Command
- * @param {InstallMode} mode Installation mode
+ * @param {Command} command Command
+ * @param {Mode} mode Installation mode
  * @param {string[]} packages Packages name
  * @returns {string[]} Installation arguments
  */
 export function createInstallArgs(
-	command: 'npm' | 'yarn',
-	mode: InstallMode,
+	command: Command,
+	mode: Mode,
 	packages: string[]
 ): string[] {
 	let args: string[] = [];
 
-	if (command.toLowerCase() === 'npm') {
+	if (command === 'npm') {
 		args.push('install');
 
 		switch (mode) {
-			case MODE.GLOBAL:
+			case 'GLOBAL':
 				args.push('-g');
 				break;
-			case MODE.SAVE:
+			case 'SAVE':
 				args.push('-S');
 				break;
-			case MODE.SAVE_DEV:
+			case 'SAVE_DEV':
 				args.push('-D');
 				break;
 		}
@@ -34,10 +34,10 @@ export function createInstallArgs(
 		args.push('add');
 
 		switch (mode) {
-			case MODE.GLOBAL:
+			case 'GLOBAL':
 				args.unshift('global');
 				break;
-			case MODE.SAVE_DEV:
+			case 'SAVE_DEV':
 				args.push('-D');
 				break;
 		}
@@ -52,36 +52,36 @@ export function createInstallArgs(
  * Create uninstallation arguments.
  *
  * @export
- * @param {('npm'| 'yarn')} command Command
- * @param {InstallMode} mode Uninstallation mode
+ * @param {Command} command Command
+ * @param {Mode} mode Uninstallation mode
  * @param {string[]} packages Packages name
  * @returns {string[]} Uninstallation arguments
  */
 export function createUninstallArgs(
-	command: 'npm'| 'yarn',
-	mode: InstallMode,
+	command: Command,
+	mode: Mode,
 	packages: string[]
 ): string[] {
 	let args: string[] = [];
 
-	if (command.toLowerCase() === 'npm') {
+	if (command === 'npm') {
 		args.push('uninstall');
 
 		switch (mode) {
-			case MODE.GLOBAL:
+			case 'GLOBAL':
 				args.push('-g');
 				break;
-			case MODE.SAVE:
+			case 'SAVE':
 				args.push('-S');
 				break;
-			case MODE.SAVE_DEV:
+			case 'SAVE_DEV':
 				args.push('-D');
 				break;
 		}
 	} else {
 		args.push('remove');
 
-		if (mode === MODE.GLOBAL) {
+		if (mode === 'GLOBAL') {
 			args.unshift('global');
 		}
 	}

@@ -1,18 +1,20 @@
 import spawn from 'cross-spawn';
 
+import { Command } from '../types';
+
 /**
  * Spawn the command.
  *
  * @export
- * @param {('npm'| 'yarn')} command Command
+ * @param {Command} command Command
  * @param {string[]} args Command arguments
- * @param {boolean} [verbose=false] Display more information
+ * @param {boolean} verbose Display more information
  * @returns {Promise<void>} Promise of spawn
  */
 export default function spawnCommand(
-	command: 'npm' | 'yarn',
+	command: Command,
 	args: string[],
-	verbose: boolean = false
+	verbose: boolean
 ): Promise<void> {
 	// Verbose only NPM
 	if (command.toLowerCase() === 'npm') {

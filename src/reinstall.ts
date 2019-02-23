@@ -4,11 +4,12 @@ import hasYarn from 'has-yarn';
 import { EOL } from 'os';
 import { Arguments } from 'yargs';
 
-import MODE from './lib/mode';
-import { NPMRun, NPMRunAll } from './lib/npm';
-import { YarnRun, YarnRunAll } from './lib/yarn';
+import createProgressMessage from './lib/createProgressMessage';
+import run from './lib/run';
+import runAll from './lib/runAll';
+import { Command, Mode } from './types';
 
-const { red } = chalk;
+const { cyan, red, yellow } = chalk;
 
 const canIUseYarn: boolean = caniuseYarn();
 
@@ -20,48 +21,53 @@ const canIUseYarn: boolean = caniuseYarn();
  */
 export default async function reinstall(argv: Arguments) {
 	const yarnExists: boolean = hasYarn();
-	const verbose = argv.verbose as boolean;
+	const global = argv.global as boolean;
+	const save = argv.save as boolean;
+	const saveDev = argv['save-dev'] as boolean;
 	const forceYarn = argv.yarn as boolean;
 	const forceNPM = argv.npm as boolean;
+	const verbose = argv.verbose as boolean;
 
-	let runAll: typeof NPMRunAll | typeof YarnRunAll;
-	let run: typeof NPMRun | typeof YarnRun;
+	let command: Command = 'npm';
 
-	if (forceYarn) {
-		runAll = YarnRunAll;
-		run = YarnRun;
-	} else if (forceNPM) {
-		runAll = NPMRunAll;
-		run = NPMRun;
-	} else {
-		runAll = canIUseYarn && yarnExists ? YarnRunAll : NPMRunAll;
+	if (yarnExists) {
+		command = 'yarn';
+	}
 
-		// Only use NPM on global when it isn't forced to use Yarn.
-		if (argv.global) {
-			run = NPMRun;
-		} else {
-			run = canIUseYarn && yarnExists ? YarnRun : NPMRun;
-		}
+	// Force
+	if (forceNPM) {
+		command = 'npm';
+	} else if (forceYarn) {
+		command = 'yarn';
+	}
+
+	// Checking yarn command
+	if (command === 'yarn' && !canIUseYarn) {
+		command = 'npm';
+
+		process.stdout.write(
+			cyan(
+				`"${yellow(
+					'yarn'
+				)}" command does not exist. Fallback to npm.${EOL}`
+			)
+		);
 	}
 
 	try {
-		if (argv._.length > 0) {
+		if ((global || save || saveDev) && argv._.length > 0) {
 			const packages = argv._; // Name of packages
+			const mode: Mode = global ? 'GLOBAL' : save ? 'SAVE' : 'SAVE_DEV';
 
-			if (argv.global) {
-				await run(MODE.GLOBAL, packages, verbose);
-			} else if (argv.save) {
-				await run(MODE.SAVE, packages, verbose);
-			} else if (argv.saveDev) {
-				await run(MODE.SAVE_DEV, packages, verbose);
-			}
+			await run(command, mode, packages, verbose);
 		} else {
-			await runAll(verbose);
+			await runAll(command, verbose);
 		}
 	} catch (e) {
 		const err = e as Error;
-		const errString = err.stack ? err.stack : err.toString();
+		const errMsg = red(`Error: ${err.stack ? err.stack : err.toString()}`);
 
-		process.stderr.write(`${red(errString)}${EOL}`);
+		process.stderr.write(`${createProgressMessage('fail')}${EOL}`);
+		process.stderr.write(`${errMsg}${EOL}`);
 	}
 }

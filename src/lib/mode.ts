@@ -1,6 +1,12 @@
 export type InstallMode = 'GLOBAL' | 'SAVE' | 'SAVE_DEV';
 
-const MODE = Object.freeze<Record<string, InstallMode>>({
+type Mode = {
+	GLOBAL: InstallMode;
+	SAVE: InstallMode;
+	SAVE_DEV: InstallMode;
+};
+
+const MODE = Object.freeze<Mode>({
 	GLOBAL: 'GLOBAL',
 	SAVE: 'SAVE',
 	SAVE_DEV: 'SAVE_DEV'
