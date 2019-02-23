@@ -4,13 +4,13 @@ import spawn from 'cross-spawn';
  * Spawn the command.
  *
  * @export
- * @param {string} command Command
+ * @param {('npm'| 'yarn')} command Command
  * @param {string[]} args Command arguments
  * @param {boolean} [verbose=false] Display more information
  * @returns {Promise<void>} Promise of spawn
  */
 export default function spawnCommand(
-	command: string,
+	command: 'npm' | 'yarn',
 	args: string[],
 	verbose: boolean = false
 ): Promise<void> {
