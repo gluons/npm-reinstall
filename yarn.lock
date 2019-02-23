@@ -25,6 +25,13 @@
   resolved "https://registry.npmjs.org/@types/chalk-animation/-/chalk-animation-1.6.0.tgz#247ee2d9e076e6b227efe31f832ee2fa1ce81dde"
   integrity sha512-2Doz1i/CVWhPnF2MUv23LEa6pwJiaXQMrkAiLy+lglXGFimDqrySZOLx7xswO6Mx1bnhGvxVVFZzKiVDIxjlnA==
 
+"@types/cross-spawn@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/@types/cross-spawn/-/cross-spawn-6.0.0.tgz#320aaf1d1a12979f1b84fe7a5590a7e860bf3a80"
+  integrity sha512-evp2ZGsFw9YKprDbg8ySgC9NA15g3YgiI8ANkGmKKvvi0P2aDGYLPxQIC5qfeKNUOe3TjABVGuah6omPRpIYhg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/del@^3.0.1":
   version "3.0.1"
   resolved "https://registry.npmjs.org/@types/del/-/del-3.0.1.tgz#4712da8c119873cbbf533ad8dbf1baac5940ac5d"
@@ -38,6 +45,11 @@
   dependencies:
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/has-yarn@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@types/has-yarn/-/has-yarn-1.0.0.tgz#912253265415ba3e719d4ff0cb68c915fb933a09"
+  integrity sha512-ODVaBw6s7WVbr9qtpcLtcm9gGM3uQSn0GvwuLFlgAvuOWIsqUCRN/SwdjQrhq8PQ9+gICbVx1iL3X9v9PKGKSg==
 
 "@types/minimatch@*":
   version "3.0.1"
