@@ -2,25 +2,30 @@ import chalk from 'chalk';
 import ora from 'ora';
 
 import { createInstallArgs, createUninstallArgs } from '../createArgs';
-import MODE from '../mode';
+import MODE, { InstallMode } from '../mode';
 import spawnYarn from './spawnYarn';
 
 /**
  * Run installing some packages via Yarn.
  *
  * @export
- * @param {string} mode Installation mode.
- * @param {string[]} packages Package names.
- * @param {boolean} [verbose=false] Display more information.
+ * @param {string} mode Installation mode
+ * @param {string[]} packages Package names
+ * @param {boolean} [verbose=false] Display more information
  * @returns
  */
-export default function run(mode: string, packages: string[], verbose = false) {
-	let spinner = ora({
+export default async function run(
+	mode: InstallMode,
+	packages: string[],
+	verbose: boolean = false
+) {
+	const spinner = ora({
 		color: 'yellow'
 	});
-	let packagesAsString: string = chalk.cyan.bold(packages.join(' '));
-	let installArgs = createInstallArgs('yarn', mode, packages);
-	let uninstallArgs = createUninstallArgs('yarn', mode, packages);
+	const packagesAsString: string = chalk.cyan.bold(packages.join(' '));
+	const installArgs = createInstallArgs('yarn', mode, packages);
+	const uninstallArgs = createUninstallArgs('yarn', mode, packages);
+
 	let endingInfo = '';
 
 	switch (mode) {
@@ -36,22 +41,26 @@ export default function run(mode: string, packages: string[], verbose = false) {
 	}
 
 	if (!verbose) {
-		let prefix = (mode === MODE.SAVE) || (mode === MODE.SAVE_DEV) ? 'from ' : '';
-		spinner.start(`Uninstalling ${packagesAsString} ${prefix}${endingInfo} ...`);
+		const prefix =
+			mode === MODE.SAVE || mode === MODE.SAVE_DEV ? 'from ' : '';
+
+		spinner.start(
+			`Uninstalling ${packagesAsString} ${prefix}${endingInfo} ...`
+		);
 	}
 
-	return spawnYarn(uninstallArgs, verbose)
-		.then(() => {
-			if (!verbose) {
-				let prefix = (mode === MODE.SAVE) || (mode === MODE.SAVE_DEV) ? 'as ' : '';
-				spinner.text = `Installing ${packagesAsString} ${prefix}${endingInfo} ...`;
-			}
-			return spawnYarn(installArgs, verbose);
-		})
-		.then(() => {
-			if (!verbose) {
-				spinner.succeed(chalk.green('Finish reinstallation.'));
-			}
-			return Promise.resolve();
-		});
+	await spawnYarn(uninstallArgs, verbose);
+
+	if (!verbose) {
+		const prefix =
+			mode === MODE.SAVE || mode === MODE.SAVE_DEV ? 'as ' : '';
+
+		spinner.text = `Installing ${packagesAsString} ${prefix}${endingInfo} ...`;
+	}
+
+	await spawnYarn(installArgs, verbose);
+
+	if (!verbose) {
+		spinner.succeed(chalk.green('Finish reinstallation.'));
+	}
 }

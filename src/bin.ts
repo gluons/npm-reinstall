@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import chalk from 'chalk';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 
 import notifier from './lib/notifier';
 import reinstall from './reinstall';
@@ -54,8 +54,9 @@ const argv = yargs
 	.epilog(`⭐ Star me at ${repo} 😃`)
 
 	.check(parsedArgv => {
-		let npm: boolean = parsedArgv.npm;
-		let yarn: boolean = parsedArgv.yarn;
+		const npm: boolean = parsedArgv.npm;
+		const yarn: boolean = parsedArgv.yarn;
+
 		if (npm && yarn) {
 			throw new Error(`ℹ️ Arguments ${yellow('npm')} and ${yellow('yarn')} are mutually exclusive`);
 		} else {

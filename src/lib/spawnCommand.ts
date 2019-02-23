@@ -4,12 +4,16 @@ import spawn from 'cross-spawn';
  * Spawn the command.
  *
  * @export
- * @param {string} command Command.
- * @param {string[]} args Command arguments.
- * @param {boolean} [verbose=false] Display more information.
- * @returns Promise of spawn.
+ * @param {string} command Command
+ * @param {string[]} args Command arguments
+ * @param {boolean} [verbose=false] Display more information
+ * @returns {Promise<void>} Promise of spawn
  */
-export default function spawnCommand(command: string, args: string[], verbose = false) {
+export default function spawnCommand(
+	command: string,
+	args: string[],
+	verbose: boolean = false
+): Promise<void> {
 	// Verbose only NPM
 	if (command.toLowerCase() === 'npm') {
 		if (verbose) {
@@ -20,11 +24,11 @@ export default function spawnCommand(command: string, args: string[], verbose = 
 	}
 
 	return new Promise((resolve, reject) => {
-		let child = spawn(command, args, {
+		const child = spawn(command, args, {
 			stdio: verbose ? 'inherit' : 'pipe'
 		});
 
-		child.on('error', err => {
+		child.on('error', (err: unknown) => {
 			reject(err);
 		});
 		child.on('close', () => {

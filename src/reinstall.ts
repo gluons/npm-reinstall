@@ -1,7 +1,8 @@
-import * as caniuseYarn from '@danielbayerlein/caniuse-yarn';
+import caniuseYarn from '@danielbayerlein/caniuse-yarn';
 import chalk from 'chalk';
-import * as hasYarn from 'has-yarn';
-import * as yargs from 'yargs';
+import hasYarn from 'has-yarn';
+import { EOL } from 'os';
+import { Arguments } from 'yargs';
 
 import MODE from './lib/mode';
 import { NPMRun, NPMRunAll } from './lib/npm';
@@ -12,19 +13,20 @@ const { red } = chalk;
 const canIUseYarn: boolean = caniuseYarn();
 
 /**
- * Run reinstall.
+ * Reinstall packages.
  *
  * @export
- * @param {yargs.Arguments} argv Yargs' argv.
+ * @param {Arguments} argv Yargs' `argv`
  */
-export default function reinstall(argv: yargs.Arguments) {
-	let yarnExists: boolean = hasYarn();
-	let verbose: boolean = argv.verbose as boolean;
-	let forceYarn: boolean = argv.yarn as boolean;
-	let forceNPM: boolean = argv.npm as boolean;
+export default async function reinstall(argv: Arguments) {
+	const yarnExists: boolean = hasYarn();
+	const verbose = argv.verbose as boolean;
+	const forceYarn = argv.yarn as boolean;
+	const forceNPM = argv.npm as boolean;
 
 	let runAll: typeof NPMRunAll | typeof YarnRunAll;
 	let run: typeof NPMRun | typeof YarnRun;
+
 	if (forceYarn) {
 		runAll = YarnRunAll;
 		run = YarnRun;
@@ -32,34 +34,34 @@ export default function reinstall(argv: yargs.Arguments) {
 		runAll = NPMRunAll;
 		run = NPMRun;
 	} else {
-		runAll = (canIUseYarn && yarnExists) ? YarnRunAll : NPMRunAll;
+		runAll = canIUseYarn && yarnExists ? YarnRunAll : NPMRunAll;
 
 		// Only use NPM on global when it isn't forced to use Yarn.
 		if (argv.global) {
 			run = NPMRun;
 		} else {
-			run = (canIUseYarn && yarnExists) ? YarnRun : NPMRun;
+			run = canIUseYarn && yarnExists ? YarnRun : NPMRun;
 		}
 	}
 
-	let errCatch = (err: Error) => {
-		let errString: string = err.stack ? err.stack : err.toString();
-		console.error(red(errString));
-	};
+	try {
+		if (argv._.length > 0) {
+			const packages = argv._; // Name of packages
 
-	if (argv._.length > 0) {
-		if (argv.global) {
-			run(MODE.GLOBAL, argv._, verbose)
-				.catch(errCatch);
-		} else if (argv.save) {
-			run(MODE.SAVE, argv._, verbose)
-				.catch(errCatch);
-		} else if (argv.saveDev) {
-			run(MODE.SAVE_DEV, argv._, verbose)
-				.catch(errCatch);
+			if (argv.global) {
+				await run(MODE.GLOBAL, packages, verbose);
+			} else if (argv.save) {
+				await run(MODE.SAVE, packages, verbose);
+			} else if (argv.saveDev) {
+				await run(MODE.SAVE_DEV, packages, verbose);
+			}
+		} else {
+			await runAll(verbose);
 		}
-	} else {
-		runAll(verbose)
-			.catch(errCatch);
+	} catch (e) {
+		const err = e as Error;
+		const errString = err.stack ? err.stack : err.toString();
+
+		process.stderr.write(`${red(errString)}${EOL}`);
 	}
 }
