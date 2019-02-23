@@ -4,13 +4,13 @@ import MODE, { InstallMode } from './mode';
  * Create installation arguments.
  *
  * @export
- * @param {string} command Command
+ * @param {('npm'| 'yarn')} command Command
  * @param {InstallMode} mode Installation mode
  * @param {string[]} packages Packages name
  * @returns {string[]} Installation arguments
  */
 export function createInstallArgs(
-	command: string,
+	command: 'npm' | 'yarn',
 	mode: InstallMode,
 	packages: string[]
 ): string[] {
@@ -52,13 +52,13 @@ export function createInstallArgs(
  * Create uninstallation arguments.
  *
  * @export
- * @param {string} command Command
+ * @param {('npm'| 'yarn')} command Command
  * @param {InstallMode} mode Uninstallation mode
  * @param {string[]} packages Packages name
  * @returns {string[]} Uninstallation arguments
  */
 export function createUninstallArgs(
-	command: string,
+	command: 'npm'| 'yarn',
 	mode: InstallMode,
 	packages: string[]
 ): string[] {
