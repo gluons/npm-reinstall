@@ -2,6 +2,7 @@
 	"extends": "tsconfig-gluons",
 	"compilerOptions": {
 		"outDir": "dist",
+		"declaration": false,
 		"sourceMap": false
 	},
 	"include": [
