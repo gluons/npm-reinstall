@@ -10,9 +10,8 @@
   "keywords": [],
   "author": "Saran Tanpituckpong <sarunta@gmail.com>",
   "license": "UNLICENSED",
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
     "date-eq": "^1.0.0",
-    "nvl": "^1.0.1"
+    "nvl": "^1.2.2"
   }
 }

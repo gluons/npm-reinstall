@@ -1,49 +1,37 @@
-/* tslint:disable:no-unused-expression */
-import { expect } from 'chai';
 import spawn from 'cross-spawn';
-import path from 'path';
+import { resolve } from 'path';
 
-import devDeps = require('./npm/dev-deps');
+const cwd = resolve(__dirname, './npm/dev-deps/');
+const reinstallBin = resolve(__dirname, '../dist/bin.js');
+const args = [reinstallBin, '--save-dev', 'date-eq', 'nvl'];
 
-const cwd = path.resolve(__dirname, './npm/dev-deps');
-const reinstallBin = path.resolve(__dirname, '../dist/bin.js');
-
-describe('[NPM] Dev Dependencies', function () {
-	this.slow(5000);
-	this.timeout(10000);
-
+describe('[NPM] Dev Dependencies', () => {
 	it('should have dependencies before reinstallation', () => {
-		let result: boolean = devDeps();
-		expect(result).to.be.true;
+		const devDeps = require('./npm/dev-deps');
+		const result = devDeps();
+
+		expect(result).toEqual(true);
 	});
-	it('should have dependencies after reinstallation', () => new Promise((resolve, reject) => {
-		let child = spawn('node', [reinstallBin, '--save', 'date-eq', 'nvl'], {
+	it('should have dependencies after reinstallation', done => {
+		const child = spawn('node', args, {
 			cwd,
 			stdio: 'ignore'
 		});
 
-		let isErrorThrown = false;
 		child.on('error', err => {
-			if (!isErrorThrown) {
-				isErrorThrown = true;
-				reject(err);
-			}
+			throw err;
 		});
 		child.on('close', code => {
-			if (code === 0) {
-				try {
-					let result: boolean = devDeps();
-					expect(result).to.be.true;
-					resolve();
-				} catch (err) {
-					reject(err);
-				}
-			} else {
-				if (!isErrorThrown) {
-					isErrorThrown = true;
-					reject(code);
-				}
+			if (code !== 0) {
+				throw new Error(`Command finished with code ${code}.`);
 			}
+
+			const devDeps = require('./npm/dev-deps');
+			const result = devDeps();
+
+			expect(result).toEqual(true);
+
+			done();
 		});
-	}));
+	}, 60000);
 });

@@ -1,23 +1,24 @@
+import { clearScreen } from 'ansi-escapes';
 import chalk from 'chalk';
 import { rainbow } from 'chalk-animation';
 import spawn from 'cross-spawn';
 import once from 'lodash.once';
-import path from 'path';
+import { resolve } from 'path';
 
 const { green, red } = chalk;
 
-// NPM
-const depsPath = path.resolve(__dirname, '../test/npm/deps');
-const devDepsPath = path.resolve(__dirname, '../test/npm/dev-deps');
+// npm
+const depsPath = resolve(__dirname, '../test/npm/deps');
+const devDepsPath = resolve(__dirname, '../test/npm/dev-deps');
 // Yarn
-const depsYarnPath = path.resolve(__dirname, '../test/yarn/deps');
-const devDepsYarnPath = path.resolve(__dirname, '../test/yarn/dev-deps');
+const depsYarnPath = resolve(__dirname, '../test/yarn/deps');
+const devDepsYarnPath = resolve(__dirname, '../test/yarn/dev-deps');
 
 const rb = rainbow('Preparing test...');
 
 const clear = once(() => {
 	rb.stop();
-	console.log('\u001Bc'); // Clear terminal.
+	console.log(clearScreen); // Clear terminal.
 });
 
 const depsChild = spawn('npm', ['install'], {
@@ -39,6 +40,7 @@ const devDepsYarnChild = spawn('yarn', [], {
 
 depsChild.on('close', code => {
 	clear();
+
 	if (code === 0) {
 		console.log(green('Prepare dependencies for NPM succeed.'));
 	} else {
@@ -47,6 +49,7 @@ depsChild.on('close', code => {
 });
 devDepsChild.on('close', code => {
 	clear();
+
 	if (code === 0) {
 		console.log(green('Prepare devDependencies for NPM succeed.'));
 	} else {
@@ -55,6 +58,7 @@ devDepsChild.on('close', code => {
 });
 depsYarnChild.on('close', code => {
 	clear();
+
 	if (code === 0) {
 		console.log(green('Prepare dependencies for Yarn succeed.'));
 	} else {
@@ -63,6 +67,7 @@ depsYarnChild.on('close', code => {
 });
 devDepsYarnChild.on('close', code => {
 	clear();
+
 	if (code === 0) {
 		console.log(green('Prepare devDependencies for Yarn succeed.'));
 	} else {

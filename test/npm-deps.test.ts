@@ -1,49 +1,37 @@
-/* tslint:disable:no-unused-expression */
-import { expect } from 'chai';
 import spawn from 'cross-spawn';
-import path from 'path';
+import { resolve } from 'path';
 
-import deps = require('./npm/deps');
+const cwd = resolve(__dirname, './npm/deps/');
+const reinstallBin = resolve(__dirname, '../dist/bin.js');
+const args = [reinstallBin, '--save', 'vue', 'vue-router'];
 
-const cwd = path.resolve(__dirname, './npm/deps');
-const reinstallBin = path.resolve(__dirname, '../dist/bin.js');
-
-describe('[NPM] Dependencies', function () {
-	this.slow(5000);
-	this.timeout(10000);
-
+describe('[NPM] Dependencies', () => {
 	it('should have dependencies before reinstallation', () => {
-		let result = deps();
-		expect(result).to.exist;
+		const deps = require('./npm/deps');
+		const result = deps();
+
+		expect(result).toBeDefined();
 	});
-	it('should have dependencies after reinstallation', () => new Promise((resolve, reject) => {
-		let child = spawn('node', [reinstallBin, '--save', 'vue', 'vue-router'], {
+	it('should have dependencies after reinstallation', done => {
+		const child = spawn('node', args, {
 			cwd,
 			stdio: 'ignore'
 		});
 
-		let isErrorThrown = false;
 		child.on('error', err => {
-			if (!isErrorThrown) {
-				isErrorThrown = true;
-				reject(err);
-			}
+			throw err;
 		});
 		child.on('close', code => {
-			if (code === 0) {
-				try {
-					let result = deps();
-					expect(result).to.exist;
-					resolve();
-				} catch (err) {
-					reject(err);
-				}
-			} else {
-				if (!isErrorThrown) {
-					isErrorThrown = true;
-					reject(code);
-				}
+			if (code !== 0) {
+				throw new Error(`Command finished with code ${code}.`);
 			}
+
+			const deps = require('./npm/deps');
+			const result = deps();
+
+			expect(result).toBeDefined();
+
+			done();
 		});
-	}));
+	}, 60000);
 });
