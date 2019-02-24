@@ -73,5 +73,8 @@
     "ora": "^3.1.0",
     "update-notifier": "^2.5.0",
     "yargs": "^13.2.1"
+  },
+  "resolutions": {
+    "deep-extend": ">=0.5.1"
   }
 }
