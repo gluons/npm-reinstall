@@ -1,7 +1,9 @@
 language: node_js
 node_js:
-  - "8"
-  - "6"
+  - "node"
+  - "lts/*"
+  - "lts/carbon"
+  - "lts/boron"
 cache: yarn
 notifications:
   email: false
