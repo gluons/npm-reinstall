@@ -1,5 +1,6 @@
 # NPM Reinstall
 [![license](https://img.shields.io/github/license/gluons/npm-reinstall.svg?style=flat-square)](./LICENSE)
+[![GitHub top language](https://img.shields.io/github/languages/top/gluons/npm-reinstall.svg?style=flat-square)](https://github.com/gluons/npm-reinstall)
 [![npm](https://img.shields.io/npm/v/npm-reinstall.svg?style=flat-square)](https://www.npmjs.com/package/npm-reinstall)
 [![npm](https://img.shields.io/npm/dt/npm-reinstall.svg?style=flat-square)](https://www.npmjs.com/package/npm-reinstall)
 [![Travis](https://img.shields.io/travis/gluons/npm-reinstall.svg?style=flat-square)](https://travis-ci.org/gluons/npm-reinstall)
