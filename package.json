@@ -41,46 +41,40 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
     "@gluons/prettier-config": "^2.0.0",
-    "@types/ansi-escapes": "^3.0.0",
     "@types/chalk-animation": "^1.6.0",
     "@types/cross-spawn": "^6.0.0",
-    "@types/del": "^3.0.1",
-    "@types/has-yarn": "^1.0.0",
-    "@types/jest": "^24.0.6",
-    "@types/lodash.once": "^4.1.5",
+    "@types/glob": "^7.1.1",
+    "@types/jest": "^24.0.11",
+    "@types/lodash.once": "^4.1.6",
     "@types/node": "6",
-    "@types/ora": "^3.0.0",
     "@types/update-notifier": "^2.5.0",
-    "@types/yargs": "^12.0.9",
-    "ansi-escapes": "^3.2.0",
-    "babel-jest": "^24.1.0",
+    "@types/yargs": "^13.0.0",
+    "ansi-escapes": "^4.1.0",
+    "babel-jest": "^24.7.1",
     "chalk-animation": "^1.6.0",
     "cross-env": "^5.2.0",
-    "jest": "^24.1.0",
+    "jest": "^24.7.1",
     "lodash.once": "^4.1.1",
-    "prettier": "^1.16.4",
+    "prettier": "^1.17.0",
     "rimraf": "^2.6.3",
-    "ts-node": "^8.0.2",
+    "ts-node": "^8.1.0",
     "tsconfig-gluons": "^1.0.1",
-    "tslint": "^5.13.0",
+    "tslint": "^5.16.0",
     "tslint-config-gluons": "^2.1.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.4.3"
   },
   "dependencies": {
     "@danielbayerlein/caniuse-yarn": "^1.1.0",
     "chalk": "^2.4.2",
     "cross-spawn": "^6.0.5",
-    "del": "^3.0.0",
-    "has-yarn": "^1.0.0",
-    "ora": "^3.1.0",
+    "del": "^4.1.0",
+    "has-yarn": "^2.1.0",
+    "ora": "^3.4.0",
     "update-notifier": "^2.5.0",
-    "yargs": "^13.2.1"
-  },
-  "resolutions": {
-    "deep-extend": "^0.6.0"
+    "yargs": "^13.2.2"
   }
 }
