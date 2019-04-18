@@ -1,3 +1,4 @@
 *.ts linguist-language=TypeScript
 test/npm/** linguist-detectable=false
 test/yarn/** linguist-detectable=false
+*.config.js linguist-detectable=false
