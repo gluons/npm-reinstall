@@ -3,7 +3,6 @@ node_js:
   - "node"
   - "lts/*"
   - "lts/carbon"
-  - "lts/boron"
 cache: yarn
 notifications:
   email: false
