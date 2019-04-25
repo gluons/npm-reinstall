@@ -69,9 +69,11 @@
   },
   "dependencies": {
     "@danielbayerlein/caniuse-yarn": "^1.1.0",
+    "caniuse-pnpm": "^1.1.0",
     "chalk": "^2.4.2",
     "cross-spawn": "^6.0.5",
     "del": "^4.1.0",
+    "has-pnpm": "^1.1.1",
     "has-yarn": "^2.1.0",
     "ora": "^3.4.0",
     "update-notifier": "^2.5.0",

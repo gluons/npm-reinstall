@@ -1380,6 +1380,16 @@ caniuse-lite@^1.0.30000960:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000960.tgz#ec48297037e5607f582f246ae7b12bee66a78999"
   integrity sha512-7nK5qs17icQaX6V3/RYrJkOsZyRNnroA4+ZwxaKJzIKy+crIy0Mz5CBlLySd2SNV+4nbUZeqeNfiaEieUBu3aA==
 
+caniuse-pnpm@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/caniuse-pnpm/-/caniuse-pnpm-1.1.0.tgz#47a12099b456bad09a991f0c4c14c31848b330d0"
+  integrity sha512-FMWsLsSIm0e370Ghaa+aRUIU5l9JFliQhBhHSx+7qugqzFWRHJIk3bo4cA8voqDvD3wMRQhRnT+QEEFlJGYqLQ==
+  dependencies:
+    chalk "^2.4.2"
+    figures "^3.0.0"
+    shelljs "^0.8.3"
+    yargs "^13.2.2"
+
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/capture-exit/-/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -2060,6 +2070,13 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
+figures@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/figures/-/figures-3.0.0.tgz#756275c964646163cc6f9197c7a0295dbfd04de9"
+  integrity sha512-HKri+WoWoUgr83pehn/SIgLOMZ9nAWC6dcGj26RY2R4F50u4+RTUz0RCrUlOV3nKRAICW1UGzyb+kcX2qK1S/g==
+  dependencies:
+    escape-string-regexp "^1.0.5"
+
 fileset@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/fileset/-/fileset-2.0.3.tgz#8e7548a96d3cc2327ee5e674168723a333bba2a0"
@@ -2322,6 +2339,15 @@ has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
+
+has-pnpm@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/has-pnpm/-/has-pnpm-1.1.1.tgz#3e49c95ac4c85f49f1c8f5a81b9c640c977a4636"
+  integrity sha512-UuFVbK8NfJam50Zet+uKzOBVgOkwZGexFUeSLQ+HYQ9JVd4u8lxvLAscVqtiB+BPuTrKg4u5QdmBxIiwPAftyA==
+  dependencies:
+    chalk "^2.4.2"
+    figures "^3.0.0"
+    yargs "^13.2.2"
 
 has-symbols@^1.0.0:
   version "1.0.0"
@@ -4529,6 +4555,15 @@ shelljs@^0.7.5:
   version "0.7.8"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.8.tgz#decbcf874b0d1e5fb72e14b164a9683048e9acb3"
   integrity sha1-3svPh0sNHl+3LhSxZKloMEjprLM=
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
+
+shelljs@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.3.tgz#a7f3319520ebf09ee81275b2368adb286659b097"
+  integrity sha512-fc0BKlAWiLpwZljmOvAOTE/gXawtCoNrP5oaY7KIaQbbyHeQVg01pSEuEGvGh3HEdBU4baCD7wQBwADmM/7f7A==
   dependencies:
     glob "^7.0.0"
     interpret "^1.0.0"

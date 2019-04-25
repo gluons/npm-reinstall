@@ -9,7 +9,6 @@ export default async function runAll(
 	command: Command,
 	verbose: boolean = false
 ) {
-	const args = command === 'npm' ? ['install'] : [];
 	const spinner = ora({
 		color: 'yellow'
 	});
@@ -29,7 +28,7 @@ export default async function runAll(
 		spinner.text = installMsg;
 	}
 
-	await spawnCommand(command, args, verbose);
+	await spawnCommand(command, ['install'], verbose);
 
 	// Finish
 	if (!verbose) {

@@ -30,12 +30,23 @@ export function createInstallArgs(
 				args.push('-D');
 				break;
 		}
-	} else {
+	} else if (command === 'yarn') {
 		args.push('add');
 
 		switch (mode) {
 			case 'GLOBAL':
 				args.unshift('global');
+				break;
+			case 'SAVE_DEV':
+				args.push('-D');
+				break;
+		}
+	} else {
+		args.push('install');
+
+		switch (mode) {
+			case 'SAVE':
+				args.push('-P');
 				break;
 			case 'SAVE_DEV':
 				args.push('-D');
@@ -78,12 +89,14 @@ export function createUninstallArgs(
 				args.push('-D');
 				break;
 		}
-	} else {
+	} else if (command === 'yarn') {
 		args.push('remove');
 
 		if (mode === 'GLOBAL') {
 			args.unshift('global');
 		}
+	} else {
+		args.push('uninstall');
 	}
 
 	args = args.concat(packages);
