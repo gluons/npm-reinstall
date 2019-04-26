@@ -1,11 +1,9 @@
 import { clearScreen } from 'ansi-escapes';
-import chalk from 'chalk';
 import { rainbow } from 'chalk-animation';
-import spawn from 'cross-spawn';
-import once from 'lodash.once';
+import execa from 'execa';
+import { EOL } from 'os';
 import { resolve } from 'path';
-
-const { green, red } = chalk;
+import signale from 'signale';
 
 // npm
 const depsPath = resolve(__dirname, '../test/npm/deps');
@@ -16,61 +14,36 @@ const devDepsYarnPath = resolve(__dirname, '../test/yarn/dev-deps');
 
 const rb = rainbow('Preparing test...');
 
-const clear = once(() => {
+const clear = () => {
 	rb.stop();
-	console.log(clearScreen); // Clear terminal.
-});
+	process.stdout.write(`${clearScreen}${EOL}`); // Clear terminal
+};
 
-const depsChild = spawn('npm', ['install'], {
-	cwd: depsPath,
-	stdio: 'ignore'
-});
-const devDepsChild = spawn('npm', ['install'], {
-	cwd: devDepsPath,
-	stdio: 'ignore'
-});
-const depsYarnChild = spawn('yarn', [], {
-	cwd: depsYarnPath,
-	stdio: 'ignore'
-});
-const devDepsYarnChild = spawn('yarn', [], {
-	cwd: devDepsYarnPath,
-	stdio: 'ignore'
-});
+(async () => {
+	try {
+		await Promise.all([
+			execa('npm', ['install'], {
+				cwd: depsPath,
+				stdio: 'ignore'
+			}),
+			execa('npm', ['install'], {
+				cwd: devDepsPath,
+				stdio: 'ignore'
+			}),
+			execa('yarn', ['install'], {
+				cwd: depsYarnPath,
+				stdio: 'ignore'
+			}),
+			execa('yarn', ['install'], {
+				cwd: devDepsYarnPath,
+				stdio: 'ignore'
+			})
+		]);
 
-depsChild.on('close', code => {
-	clear();
+		clear();
 
-	if (code === 0) {
-		console.log(green('Prepare dependencies for NPM succeed.'));
-	} else {
-		console.log(red('Prepare dependencies for NPM fail.'));
+		signale.success('Test fixtures dependencies prepared.');
+	} catch (err) {
+		signale.error(err);
 	}
-});
-devDepsChild.on('close', code => {
-	clear();
-
-	if (code === 0) {
-		console.log(green('Prepare devDependencies for NPM succeed.'));
-	} else {
-		console.log(red('Prepare devDependencies for NPM fail.'));
-	}
-});
-depsYarnChild.on('close', code => {
-	clear();
-
-	if (code === 0) {
-		console.log(green('Prepare dependencies for Yarn succeed.'));
-	} else {
-		console.log(red('Prepare dependencies for Yarn fail.'));
-	}
-});
-devDepsYarnChild.on('close', code => {
-	clear();
-
-	if (code === 0) {
-		console.log(green('Prepare devDependencies for Yarn succeed.'));
-	} else {
-		console.log(red('Prepare devDependencies for Yarn fail.'));
-	}
-});
+})();
