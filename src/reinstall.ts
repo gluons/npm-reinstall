@@ -17,25 +17,37 @@ const { red } = chalk;
 const canIUseYarn: boolean = caniuseYarn();
 const canIUsePNPM = caniusePNPM();
 
+interface Argv {
+	global: boolean;
+	save: boolean;
+	'save-dev': boolean;
+
+	yarn: boolean;
+	npm: boolean;
+	pnpm: boolean;
+
+	verbose: boolean;
+}
+
 /**
  * Reinstall packages.
  *
  * @export
- * @param {Arguments} argv Yargs' `argv`
+ * @param {Arguments<Argv>} argv Yargs' `argv`
  */
-export default async function reinstall(argv: Arguments) {
+export default async function reinstall(argv: Arguments<Argv>) {
 	const yarnExists = hasYarn();
 	const pnpmExists = hasPNPM();
 
-	const global = argv.global as boolean;
-	const save = argv.save as boolean;
-	const saveDev = argv['save-dev'] as boolean;
+	const global = argv.global;
+	const save = argv.save;
+	const saveDev = argv['save-dev'];
 
-	const forceYarn = argv.yarn as boolean;
-	const forceNPM = argv.npm as boolean;
-	const forcePNPM = argv.pnpm as boolean;
+	const forceYarn = argv.yarn;
+	const forceNPM = argv.npm;
+	const forcePNPM = argv.pnpm;
 
-	const verbose = argv.verbose as boolean;
+	const verbose = argv.verbose;
 
 	let command: Command = 'npm';
 
