@@ -845,13 +845,6 @@
   resolved "https://registry.yarnpkg.com/@types/chalk-animation/-/chalk-animation-1.6.0.tgz#247ee2d9e076e6b227efe31f832ee2fa1ce81dde"
   integrity sha512-2Doz1i/CVWhPnF2MUv23LEa6pwJiaXQMrkAiLy+lglXGFimDqrySZOLx7xswO6Mx1bnhGvxVVFZzKiVDIxjlnA==
 
-"@types/cross-spawn@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@types/cross-spawn/-/cross-spawn-6.0.0.tgz#320aaf1d1a12979f1b84fe7a5590a7e860bf3a80"
-  integrity sha512-evp2ZGsFw9YKprDbg8ySgC9NA15g3YgiI8ANkGmKKvvi0P2aDGYLPxQIC5qfeKNUOe3TjABVGuah6omPRpIYhg==
-  dependencies:
-    "@types/node" "*"
-
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
