@@ -1,13 +1,13 @@
 import execa from 'execa';
 import { resolve } from 'path';
 
-const cwd = resolve(__dirname, './yarn/dev-deps/');
+const cwd = resolve(__dirname, './fixtures/yarn/dev-deps/');
 const reinstallBin = resolve(__dirname, '../dist/bin.js');
 const args = [reinstallBin, '--save-dev', 'date-eq', 'nvl'];
 
 describe('[Yarn] Dev Dependencies', () => {
 	it('should have dependencies before reinstallation', () => {
-		const devDeps = require('./yarn/dev-deps');
+		const devDeps = require('./fixtures/yarn/dev-deps');
 		const result = devDeps();
 
 		expect(result).toEqual(true);
@@ -18,7 +18,7 @@ describe('[Yarn] Dev Dependencies', () => {
 			stdio: 'ignore'
 		});
 
-		const devDeps = require('./yarn/dev-deps');
+		const devDeps = require('./fixtures/yarn/dev-deps');
 		const result = devDeps();
 
 		expect(result).toEqual(true);

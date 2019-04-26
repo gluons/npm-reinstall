@@ -1,13 +1,13 @@
 import execa from 'execa';
 import { resolve } from 'path';
 
-const cwd = resolve(__dirname, './npm/deps/');
+const cwd = resolve(__dirname, './fixtures/npm/deps/');
 const reinstallBin = resolve(__dirname, '../dist/bin.js');
 const args = [reinstallBin, '--save', 'vue', 'vue-router'];
 
 describe('[NPM] Dependencies', () => {
 	it('should have dependencies before reinstallation', () => {
-		const deps = require('./npm/deps');
+		const deps = require('./fixtures/npm/deps');
 		const result = deps();
 
 		expect(result).toBeDefined();
@@ -18,7 +18,7 @@ describe('[NPM] Dependencies', () => {
 			stdio: 'ignore'
 		});
 
-		const deps = require('./npm/deps');
+		const deps = require('./fixtures/npm/deps');
 		const result = deps();
 
 		expect(result).toBeDefined();

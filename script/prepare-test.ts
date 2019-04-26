@@ -6,11 +6,14 @@ import { resolve } from 'path';
 import signale from 'signale';
 
 // npm
-const depsPath = resolve(__dirname, '../test/npm/deps');
-const devDepsPath = resolve(__dirname, '../test/npm/dev-deps');
+const depsPath = resolve(__dirname, '../test/fixtures/npm/deps');
+const devDepsPath = resolve(__dirname, '../test/fixtures/npm/dev-deps');
 // Yarn
-const depsYarnPath = resolve(__dirname, '../test/yarn/deps');
-const devDepsYarnPath = resolve(__dirname, '../test/yarn/dev-deps');
+const depsYarnPath = resolve(__dirname, '../test/fixtures/yarn/deps');
+const devDepsYarnPath = resolve(__dirname, '../test/fixtures/yarn/dev-deps');
+// pnpm
+const depsPNPMPath = resolve(__dirname, '../test/fixtures/pnpm/deps');
+const devDepsPNPMPath = resolve(__dirname, '../test/fixtures/pnpm/dev-deps');
 
 const rb = rainbow('Preparing test...');
 
@@ -37,6 +40,14 @@ const clear = () => {
 			execa('yarn', ['install'], {
 				cwd: devDepsYarnPath,
 				stdio: 'ignore'
+			}),
+			execa('pnpm', ['install'], {
+				cwd: depsPNPMPath,
+				stdio: 'ignore'
+			}),
+			execa('pnpm', ['install'], {
+				cwd: devDepsPNPMPath,
+				stdio: 'ignore'
 			})
 		]);
 
@@ -45,5 +56,6 @@ const clear = () => {
 		signale.success('Test fixtures dependencies prepared.');
 	} catch (err) {
 		signale.error(err);
+		process.exit(1);
 	}
 })();
