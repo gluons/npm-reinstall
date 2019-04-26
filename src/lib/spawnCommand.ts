@@ -1,4 +1,4 @@
-import spawn from 'cross-spawn';
+import execa from 'execa';
 
 import { Command } from '../types';
 
@@ -11,7 +11,7 @@ import { Command } from '../types';
  * @param {boolean} verbose Display more information
  * @returns {Promise<void>} Promise of spawn
  */
-export default function spawnCommand(
+export default async function spawnCommand(
 	command: Command,
 	args: string[],
 	verbose: boolean
@@ -25,16 +25,7 @@ export default function spawnCommand(
 		}
 	}
 
-	return new Promise((resolve, reject) => {
-		const child = spawn(command, args, {
-			stdio: verbose ? 'inherit' : 'pipe'
-		});
-
-		child.on('error', (err: unknown) => {
-			reject(err);
-		});
-		child.on('close', () => {
-			resolve();
-		});
+	await execa(command, args, {
+		stdio: verbose ? 'inherit' : 'pipe'
 	});
 }
