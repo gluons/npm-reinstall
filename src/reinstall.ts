@@ -14,7 +14,7 @@ import { Command, Mode } from './types';
 
 const { red } = chalk;
 
-const canIUseYarn: boolean = caniuseYarn();
+const canIUseYarn = caniuseYarn();
 const canIUsePNPM = caniusePNPM();
 
 interface Argv {
