@@ -1,76 +1,70 @@
 import { clearScreen } from 'ansi-escapes';
-import chalk from 'chalk';
-import { rainbow } from 'chalk-animation';
-import spawn from 'cross-spawn';
-import once from 'lodash.once';
+import { Animation, rainbow } from 'chalk-animation';
+import execa from 'execa';
+import { EOL } from 'os';
 import { resolve } from 'path';
-
-const { green, red } = chalk;
+import signale from 'signale';
 
 // npm
-const depsPath = resolve(__dirname, '../test/npm/deps');
-const devDepsPath = resolve(__dirname, '../test/npm/dev-deps');
+const depsPath = resolve(__dirname, '../test/fixtures/npm/deps');
+const devDepsPath = resolve(__dirname, '../test/fixtures/npm/dev-deps');
 // Yarn
-const depsYarnPath = resolve(__dirname, '../test/yarn/deps');
-const devDepsYarnPath = resolve(__dirname, '../test/yarn/dev-deps');
+const depsYarnPath = resolve(__dirname, '../test/fixtures/yarn/deps');
+const devDepsYarnPath = resolve(__dirname, '../test/fixtures/yarn/dev-deps');
+// pnpm
+const depsPNPMPath = resolve(__dirname, '../test/fixtures/pnpm/deps');
+const devDepsPNPMPath = resolve(__dirname, '../test/fixtures/pnpm/dev-deps');
 
-const rb = rainbow('Preparing test...');
+const isCI: boolean = (process.env.CI as unknown) as boolean;
+const rb: Animation = (rainbow(
+	'Preparing test...'
+).stop() as unknown) as Animation;
 
-const clear = once(() => {
-	rb.stop();
-	console.log(clearScreen); // Clear terminal.
-});
+if (isCI) {
+	signale.await('Preparing test...');
+} else {
+	rb.start();
+}
 
-const depsChild = spawn('npm', ['install'], {
-	cwd: depsPath,
-	stdio: 'ignore'
-});
-const devDepsChild = spawn('npm', ['install'], {
-	cwd: devDepsPath,
-	stdio: 'ignore'
-});
-const depsYarnChild = spawn('yarn', [], {
-	cwd: depsYarnPath,
-	stdio: 'ignore'
-});
-const devDepsYarnChild = spawn('yarn', [], {
-	cwd: devDepsYarnPath,
-	stdio: 'ignore'
-});
+const clear = () => {
+	!isCI && rb.stop();
+	process.stdout.write(`${clearScreen}${EOL}`); // Clear terminal
+};
 
-depsChild.on('close', code => {
-	clear();
+(async () => {
+	try {
+		await Promise.all([
+			execa('npm', ['install'], {
+				cwd: depsPath,
+				stdio: 'ignore'
+			}),
+			execa('npm', ['install'], {
+				cwd: devDepsPath,
+				stdio: 'ignore'
+			}),
+			execa('yarn', ['install'], {
+				cwd: depsYarnPath,
+				stdio: 'ignore'
+			}),
+			execa('yarn', ['install'], {
+				cwd: devDepsYarnPath,
+				stdio: 'ignore'
+			}),
+			execa('pnpm', ['install'], {
+				cwd: depsPNPMPath,
+				stdio: 'ignore'
+			}),
+			execa('pnpm', ['install'], {
+				cwd: devDepsPNPMPath,
+				stdio: 'ignore'
+			})
+		]);
 
-	if (code === 0) {
-		console.log(green('Prepare dependencies for NPM succeed.'));
-	} else {
-		console.log(red('Prepare dependencies for NPM fail.'));
+		clear();
+
+		signale.success('Test fixtures dependencies prepared.');
+	} catch (err) {
+		signale.error(err);
+		process.exit(1);
 	}
-});
-devDepsChild.on('close', code => {
-	clear();
-
-	if (code === 0) {
-		console.log(green('Prepare devDependencies for NPM succeed.'));
-	} else {
-		console.log(red('Prepare devDependencies for NPM fail.'));
-	}
-});
-depsYarnChild.on('close', code => {
-	clear();
-
-	if (code === 0) {
-		console.log(green('Prepare dependencies for Yarn succeed.'));
-	} else {
-		console.log(red('Prepare dependencies for Yarn fail.'));
-	}
-});
-devDepsYarnChild.on('close', code => {
-	clear();
-
-	if (code === 0) {
-		console.log(green('Prepare devDependencies for Yarn succeed.'));
-	} else {
-		console.log(red('Prepare devDependencies for Yarn fail.'));
-	}
-});
+})();

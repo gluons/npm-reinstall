@@ -1,37 +1,60 @@
 import caniuseYarn from '@danielbayerlein/caniuse-yarn';
+import caniusePNPM from 'caniuse-pnpm';
 import chalk from 'chalk';
+import hasPNPM from 'has-pnpm';
 import hasYarn from 'has-yarn';
 import { EOL } from 'os';
 import { Arguments } from 'yargs';
 
 import createProgressMessage from './lib/createProgressMessage';
+import noticeFallback from './lib/noticeFallback';
 import run from './lib/run';
 import runAll from './lib/runAll';
 import { Command, Mode } from './types';
 
-const { cyan, red, yellow } = chalk;
+const { red } = chalk;
 
-const canIUseYarn: boolean = caniuseYarn();
+const canIUseYarn = caniuseYarn();
+const canIUsePNPM = caniusePNPM();
+
+interface Argv {
+	global: boolean;
+	save: boolean;
+	'save-dev': boolean;
+
+	yarn: boolean;
+	npm: boolean;
+	pnpm: boolean;
+
+	verbose: boolean;
+}
 
 /**
  * Reinstall packages.
  *
  * @export
- * @param {Arguments} argv Yargs' `argv`
+ * @param {Arguments<Argv>} argv Yargs' `argv`
  */
-export default async function reinstall(argv: Arguments) {
-	const yarnExists: boolean = hasYarn();
-	const global = argv.global as boolean;
-	const save = argv.save as boolean;
-	const saveDev = argv['save-dev'] as boolean;
-	const forceYarn = argv.yarn as boolean;
-	const forceNPM = argv.npm as boolean;
-	const verbose = argv.verbose as boolean;
+export default async function reinstall(argv: Arguments<Argv>) {
+	const yarnExists = hasYarn();
+	const pnpmExists = hasPNPM();
+
+	const global = argv.global;
+	const save = argv.save;
+	const saveDev = argv['save-dev'];
+
+	const forceYarn = argv.yarn;
+	const forceNPM = argv.npm;
+	const forcePNPM = argv.pnpm;
+
+	const verbose = argv.verbose;
 
 	let command: Command = 'npm';
 
 	if (yarnExists) {
 		command = 'yarn';
+	} else if (pnpmExists) {
+		command = 'pnpm';
 	}
 
 	// Force
@@ -39,19 +62,22 @@ export default async function reinstall(argv: Arguments) {
 		command = 'npm';
 	} else if (forceYarn) {
 		command = 'yarn';
+	} else if (forcePNPM) {
+		command = 'pnpm';
 	}
 
 	// Checking yarn command
 	if (command === 'yarn' && !canIUseYarn) {
 		command = 'npm';
 
-		process.stdout.write(
-			cyan(
-				`"${yellow(
-					'yarn'
-				)}" command does not exist. Fallback to npm.${EOL}`
-			)
-		);
+		noticeFallback('yarn');
+	}
+
+	// Checking pnpm command
+	if (command === 'pnpm' && !canIUsePNPM) {
+		command = 'npm';
+
+		noticeFallback('pnpm');
 	}
 
 	try {

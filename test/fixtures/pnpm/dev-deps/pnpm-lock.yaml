@@ -1,0 +1,23 @@
+devDependencies:
+  date-eq: 1.0.0
+  nvl: 1.2.2
+lockfileVersion: 5
+packages:
+  /date-eq/1.0.0:
+    dependencies:
+      moment: 2.24.0
+      nvl: 1.2.2
+    dev: true
+    resolution:
+      integrity: sha1-l45LMwFZHA8odP78IIRr7eOkuVI=
+  /moment/2.24.0:
+    dev: true
+    resolution:
+      integrity: sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+  /nvl/1.2.2:
+    dev: true
+    resolution:
+      integrity: sha512-PgQkuTBUM2UfVInbH/t6BV0BoMmn9ctppJ7wqQoL/Nrxbh0BRSLVaUp31yDwYFrCwWmxgLbpBAPclFxnXPAC9g==
+specifiers:
+  date-eq: ^1.0.0
+  nvl: ^1.2.2

@@ -67,11 +67,15 @@ const argv = yargs
 
 	.boolean('npm')
 	.alias('npm', 'n')
-	.describe('npm', 'Force to use NPM')
+	.describe('npm', 'Force to use npm')
 
 	.boolean('yarn')
 	.alias('yarn', 'y')
 	.describe('yarn', 'Force to use Yarn')
+
+	.boolean('pnpm')
+	.alias('pnpm', 'p')
+	.describe('pnpm', 'Force to use pnpm')
 
 	.boolean('verbose')
 	.alias('verbose', 'v')

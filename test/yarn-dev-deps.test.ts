@@ -1,37 +1,26 @@
-import spawn from 'cross-spawn';
+import execa from 'execa';
 import { resolve } from 'path';
 
-const cwd = resolve(__dirname, './yarn/dev-deps/');
+const cwd = resolve(__dirname, './fixtures/yarn/dev-deps/');
 const reinstallBin = resolve(__dirname, '../dist/bin.js');
 const args = [reinstallBin, '--save-dev', 'date-eq', 'nvl'];
 
 describe('[Yarn] Dev Dependencies', () => {
 	it('should have dependencies before reinstallation', () => {
-		const devDeps = require('./yarn/dev-deps');
+		const devDeps = require('./fixtures/yarn/dev-deps');
 		const result = devDeps();
 
 		expect(result).toEqual(true);
 	});
-	it('should have dependencies after reinstallation', done => {
-		const child = spawn('node', args, {
+	it('should have dependencies after reinstallation', async () => {
+		await execa('node', args, {
 			cwd,
 			stdio: 'ignore'
 		});
 
-		child.on('error', err => {
-			throw err;
-		});
-		child.on('close', code => {
-			if (code !== 0) {
-				throw new Error(`Command finished with code ${code}.`);
-			}
+		const devDeps = require('./fixtures/yarn/dev-deps');
+		const result = devDeps();
 
-			const devDeps = require('./yarn/dev-deps');
-			const result = devDeps();
-
-			expect(result).toEqual(true);
-
-			done();
-		});
+		expect(result).toEqual(true);
 	}, 60000);
 });

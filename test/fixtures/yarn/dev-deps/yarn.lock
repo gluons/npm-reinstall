@@ -4,7 +4,7 @@
 
 date-eq@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/date-eq/-/date-eq-1.0.0.tgz#978e4b3301591c0f2874fefc20846bede3a4b952"
+  resolved "https://registry.npmjs.org/date-eq/-/date-eq-1.0.0.tgz#978e4b3301591c0f2874fefc20846bede3a4b952"
   integrity sha1-l45LMwFZHA8odP78IIRr7eOkuVI=
   dependencies:
     moment "^2.17.1"
@@ -12,10 +12,10 @@ date-eq@^1.0.0:
 
 moment@^2.17.1:
   version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  resolved "https://registry.npmjs.org/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 nvl@^1.0.1, nvl@^1.2.2:
   version "1.2.2"
-  resolved "https://registry.yarnpkg.com/nvl/-/nvl-1.2.2.tgz#39c5a9bf5092b424e962275bf066dd59e051ca83"
+  resolved "https://registry.npmjs.org/nvl/-/nvl-1.2.2.tgz#39c5a9bf5092b424e962275bf066dd59e051ca83"
   integrity sha512-PgQkuTBUM2UfVInbH/t6BV0BoMmn9ctppJ7wqQoL/Nrxbh0BRSLVaUp31yDwYFrCwWmxgLbpBAPclFxnXPAC9g==

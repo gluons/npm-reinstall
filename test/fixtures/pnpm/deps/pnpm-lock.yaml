@@ -1,0 +1,16 @@
+dependencies:
+  vue: 2.6.10
+  vue-router: 3.0.6
+lockfileVersion: 5
+packages:
+  /vue-router/3.0.6:
+    dev: false
+    resolution:
+      integrity: sha512-Ox0ciFLswtSGRTHYhGvx2L44sVbTPNS+uD2kRISuo8B39Y79rOo0Kw0hzupTmiVtftQYCZl87mwldhh2L9Aquw==
+  /vue/2.6.10:
+    dev: false
+    resolution:
+      integrity: sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+specifiers:
+  vue: ^2.6.10
+  vue-router: ^3.0.6
