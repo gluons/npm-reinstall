@@ -1,5 +1,5 @@
 import { clearScreen } from 'ansi-escapes';
-import { rainbow } from 'chalk-animation';
+import { Animation, rainbow } from 'chalk-animation';
 import execa from 'execa';
 import { EOL } from 'os';
 import { resolve } from 'path';
@@ -15,10 +15,19 @@ const devDepsYarnPath = resolve(__dirname, '../test/fixtures/yarn/dev-deps');
 const depsPNPMPath = resolve(__dirname, '../test/fixtures/pnpm/deps');
 const devDepsPNPMPath = resolve(__dirname, '../test/fixtures/pnpm/dev-deps');
 
-const rb = rainbow('Preparing test...');
+const isCI: boolean = (process.env.CI as unknown) as boolean;
+const rb: Animation = (rainbow(
+	'Preparing test...'
+).stop() as unknown) as Animation;
+
+if (isCI) {
+	signale.await('Preparing test...');
+} else {
+	rb.start();
+}
 
 const clear = () => {
-	rb.stop();
+	!isCI && rb.stop();
 	process.stdout.write(`${clearScreen}${EOL}`); // Clear terminal
 };
 
