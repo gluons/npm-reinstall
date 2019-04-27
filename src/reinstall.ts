@@ -51,10 +51,12 @@ export default async function reinstall(argv: Arguments<Argv>) {
 
 	let command: Command = 'npm';
 
-	if (yarnExists) {
-		command = 'yarn';
-	} else if (pnpmExists) {
-		command = 'pnpm';
+	if (!global) {
+		if (yarnExists) {
+			command = 'yarn';
+		} else if (pnpmExists) {
+			command = 'pnpm';
+		}
 	}
 
 	// Force
