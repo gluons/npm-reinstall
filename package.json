@@ -41,8 +41,8 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
     "@gluons/prettier-config": "^2.0.0",
     "@types/chalk-animation": "^1.6.0",
