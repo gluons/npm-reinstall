@@ -20,7 +20,9 @@
 [![NPM](https://nodei.co/npm/npm-reinstall.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/npm-reinstall)
 
 ```bash
-npm install --global npm-reinstall
+npm install -g npm-reinstall
+# or
+yarn global add npm-reinstall
 ```
 
 ## Usage
@@ -36,8 +38,9 @@ Dependency Options:
 Options:
   --help, -h     Show help                                             [boolean]
   --version, -V  Show version number                                   [boolean]
-  --npm, -n      Force to use NPM                                      [boolean]
+  --npm, -n      Force to use npm                                      [boolean]
   --yarn, -y     Force to use Yarn                                     [boolean]
+  --pnpm, -p     Force to use pnpm                                     [boolean]
   --verbose, -v  Display more information                              [boolean]
 
 Examples:
