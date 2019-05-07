@@ -1,4 +1,5 @@
 import { Command, Mode } from '../types';
+import extractPackageInfo from './extractPackageInfo';
 
 /**
  * Create installation arguments.
@@ -14,6 +15,13 @@ export function createInstallArgs(
 	mode: Mode,
 	packages: string[]
 ): string[] {
+	// Don't include package version in uninstall args
+	packages = packages.map(packageName => {
+		const { name } = extractPackageInfo(packageName);
+
+		return name;
+	});
+
 	let args: string[] = [];
 
 	if (command === 'npm') {
